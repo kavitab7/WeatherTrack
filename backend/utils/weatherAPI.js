@@ -1,15 +1,21 @@
 const axios = require('axios');
+require('dotenv').config({ path: './.env' })
+
+const WEATHER_API_URL = 'http://api.weatherstack.com/current';
+const API_KEY = process.env.WEATHERSTACK_API_KEY
 
 const fetchWeather = async (city) => {
-    const apiKey = process.env.WEATHERSTACK_API_KEY;
-    const url = `http://api.weatherstack.com/current?access_key=${apiKey}&query=${city}`;
-
     try {
-        const response = await axios.get(url)
+        const response = await axios.get(`${WEATHER_API_URL}`, {
+            params: {
+                access_key: API_KEY,
+                query: city,
+            },
+        });
         return response.data;
     } catch (error) {
-        console.log(error)
-        throw new Error('Error fetching weather data')
+        console.error('Error fetching weather data', error)
+        throw new Error('Failed to fetch weather data');
     }
 };
 

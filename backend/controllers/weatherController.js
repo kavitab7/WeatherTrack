@@ -5,7 +5,7 @@ const getWeather = async (req, res) => {
     const userId = req.user.id
 
     try {
-        const weatherData = await fetchWeather(city);
+        const weatherData = await fetchWeather(city); // Fetch weather from external API
         const query = 'INSERT INTO weather_searches (user_id, city, weather_info) VALUES (?, ?, ?)';
         await global.db.query(query, [userId, city, JSON.stringify(weatherData)]);
 
@@ -23,12 +23,18 @@ const getReports = async (req, res) => {
             FROM weather_searches w 
             JOIN users u ON w.user_id = u.id
         `;
-        const [rows] = await global.db.query(query)
-        res.json(rows)
+        const [rows] = await global.db.query(query);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'No weather reports found' });
+        }
+
+        res.json(rows);
     } catch (error) {
-        console.log(error)
+        console.log(error);
         res.status(500).json({ error: error.message });
     }
 };
+
 
 module.exports = { getWeather, getReports }

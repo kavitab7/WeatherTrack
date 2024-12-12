@@ -19,3 +19,6 @@ A web application built with **React** (frontend), **Node.js** (backend), and **
 - **API**: WeatherStack API
 
 ---
+![image](https://github.com/user-attachments/assets/fc94ab61-091b-47e7-8f15-120fabf8abf9)
+![image](https://github.com/user-attachments/assets/fa1775ee-9868-478b-8973-02e393e46c9b)
+![image](https://github.com/user-attachments/assets/a68e4a3a-6ad9-4390-9262-7960d356ec09)
